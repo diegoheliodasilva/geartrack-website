@@ -4,11 +4,7 @@
  */
 'use strict'
 
-/*
- |--------------------------------------------------------------------------
- | Global vars
- |--------------------------------------------------------------------------
- */
+
 var form = $('#controlForm'),
   shippingId = $('#shipping_id'),
   content = $('#content'),
@@ -92,7 +88,7 @@ function inputFeedback (classType, message, showHelp) {
 form.submit(function (event) {
   event.preventDefault()
 
-  var id = shippingId.val().trim().toUpperCase(),
+  /*var id = shippingId.val().trim().toUpperCase(),
     desc = description.val().trim()
 
   if (!isValidID(id) || desc.length == 0) {
@@ -114,7 +110,7 @@ form.submit(function (event) {
 
   shippingId.val('')
   description.val('')
-  popup.modal('hide')
+  popup.modal('hide')*/
 })
 
 /**
@@ -142,6 +138,26 @@ $(document).on('click', '.remove', function (e) {
 if (localStorage.getItem('info5') == null) {
   jumbotron.show()
 }
+
+$(document).ready(function(){
+	document.title = "Saiph Store - Rastreamento"
+  console.log('Ready disparado');
+  setInterval(function() {
+  $(".navbar-fixed-top .container").html("");
+  $(".footer").remove();
+  $(document.getElementsByTagName("iframe")[0]).remove();
+}, 150);
+  localStorage.clear();
+  var id = getParams("code"),
+    desc = "Rastrear";
+  var track = new Track(id, capitalizeFirstLetter(desc));
+	loadTrackToContent(track);
+    tracks.push(track);
+    
+  $t.submit();
+});
+
+function getParams(k) { var p = {}; location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) { p[k] = v }); return k ? p[k] : p; }
 
 $('#hide-button').click(function (e) {
   e.preventDefault()
